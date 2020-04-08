@@ -8,9 +8,9 @@ from cv_bridge import CvBridge
 MIN_AREA = 400
 MAX_AREA = float("inf")
 
-GREEN_COLOUR = (45, 135, 95)
-YELLOW_COLOUR = (215, 175, 40)
-RED_COLOUR = (255, 75, 75)
+GREEN_COLOUR = (55, 95, 75)
+YELLOW_COLOUR = (175, 145, 50)
+RED_COLOUR = (165, 70, 75)
 WHITE_COLOUR = (255, 255, 255)
 DELTA = 75
 
