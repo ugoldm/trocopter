@@ -7,10 +7,10 @@ from cv_bridge import CvBridge
 MIN_AREA = 400
 MAX_AREA = 9000
 
-GREEN_COLOUR = (0, 255, 0)
-YELLOW_COLOUR = (255, 255, 0)
-RED_COLOUR = (255, 0, 0)
-WHITE_COLOUR = (0, 0, 0)
+GREEN_COLOUR = (45, 135, 95)
+YELLOW_COLOUR = (215, 175, 40)
+RED_COLOUR = (255, 75, 75)
+WHITE_COLOUR = (255, 255, 255)
 DELTA = 75
 
 rospy.init_node('simple_recognition')
@@ -20,7 +20,7 @@ navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 land = rospy.ServiceProxy('land', Trigger)
 
 # Раскоментить для публикации
-#image_pub = rospy.Publisher('~debug', Image)
+image_pub = rospy.Publisher('~debug', Image)
 
 
 def image_callback(data):
@@ -45,19 +45,19 @@ def image_callback(data):
 
             x, y, w, h = cv2.boundingRect(contour)
             cropped_image = np.array(img[y:y + h, x:x + w])
-            main_color = np.average(np.average(
-                cropped_image, axis=0), axis=0)
+            main_colour = np.average(np.average(
+                cropped_image, axis=0), axis=0)[::-1]
 
-            if abs(main_color - GREEN_COLOUR).sum() < DELTA:
+            if abs(main_colour - GREEN_COLOUR).sum() < DELTA:
                 print("Зелёный")
-            elif abs(main_color - YELLOW_COLOUR).sum() < DELTA:
+            elif abs(main_colour - YELLOW_COLOUR).sum() < DELTA:
                 print("Желтый")
-            elif abs(main_color - RED_COLOUR).sum() < DELTA:
+            elif abs(main_colour - RED_COLOUR).sum() < DELTA:
                 print("Красный")
-            elif abs(main_color - WHITE_COLOUR).sum() < DELTA:
+            elif abs(main_colour - WHITE_COLOUR).sum() < DELTA:
                 print("Белый")
     # Раскоментить для публикации
-    #image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
+    image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 
 
 def main():
