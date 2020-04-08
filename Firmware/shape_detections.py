@@ -8,10 +8,10 @@ from cv_bridge import CvBridge
 MIN_AREA = 400
 MAX_AREA = 9000
 
-GREEN_COLOUR = (0, 255, 0)
-YELLOW_COLOUR = (255, 255, 0)
-RED_COLOUR = (255, 0, 0)
-WHITE_COLOUR = (0, 0, 0)
+GREEN_COLOUR = (45, 135, 95)
+YELLOW_COLOUR = (215, 175, 40)
+RED_COLOUR = (255, 75, 75)
+WHITE_COLOUR = (255, 255, 255)
 DELTA = 75
 
 rospy.init_node('simple_recognition')
@@ -43,7 +43,7 @@ def image_callback(data):
             x, y, w, h = cv2.boundingRect(contour)
             cropped_image = np.array(img[y:y + h, x:x + w])
             main_color = np.average(np.average(
-                cropped_image, axis=0), axis=0)
+                cropped_image, axis=0), axis=0)[::-1]
 
             if abs(main_color - GREEN_COLOUR).sum() < DELTA:
                 print("Зелёный")
