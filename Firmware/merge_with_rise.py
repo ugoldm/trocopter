@@ -21,6 +21,9 @@ rospy.init_node('simple_recognition')
 bridge = CvBridge()
 # Раскоментить для публикации
 image_pub = rospy.Publisher('~debug', Image)
+get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
+navigate = rospy.ServiceProxy('navigate', srv.Navigate)
+land = rospy.ServiceProxy('land', Trigger)
 
 
 def image_callback(data):
