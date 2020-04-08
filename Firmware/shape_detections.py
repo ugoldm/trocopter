@@ -17,7 +17,7 @@ DELTA = 150
 rospy.init_node('simple_recognition')
 bridge = CvBridge()
 # Раскоментить для публикации
-image_pub = rospy.Publisher('~debug', Image)
+image_pub = rospy.Publisher('~debug', Image,queue_size=None)
 
 
 def image_callback(data):
