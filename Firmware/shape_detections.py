@@ -12,7 +12,7 @@ GREEN_COLOUR = (45, 135, 95)
 YELLOW_COLOUR = (215, 175, 40)
 RED_COLOUR = (255, 75, 75)
 WHITE_COLOUR = (255, 255, 255)
-DELTA = 75
+DELTA = 150
 
 rospy.init_node('simple_recognition')
 bridge = CvBridge()
