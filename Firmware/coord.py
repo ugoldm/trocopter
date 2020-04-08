@@ -1,8 +1,12 @@
+#coding: utf8
 import cv2
 import numpy as np
 import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from clever import srv
+from std_srvs.srv import Trigger
+
 
 MIN_AREA = 400
 MAX_AREA = 9000
@@ -13,7 +17,7 @@ RED_COLOUR = (255, 75, 75)
 WHITE_COLOUR = (255, 255, 255)
 DELTA = 75
 coords = [(0.295, 0.295), (0.885, 0.295), (0.295, 0.885), (0.885, 0.885),
-         (0.295, 1.475), (0.885, 1.475), (0.295, 2.065), (0.885, 2.065), (0.59, 2.655)]
+          (0.295, 1.475), (0.885, 1.475), (0.295, 2.065), (0.885, 2.065), (0.59, 2.655)]
 
 
 rospy.init_node('simple_recognition')
@@ -62,6 +66,7 @@ def image_callback(data):
     # Раскоментить для публикации
     image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 
+
 def navigate_wait(x, y, z, speed, frame_id, tolerance=0.1):
     navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
 
@@ -78,7 +83,7 @@ def main():
 
     navigate(x=0, y=0, z=1, speed=0.5, frame_id='body', auto_arm=True)
     rospy.sleep(4)
-    #coords = [(0.295, 0.295), (0.885, 0.295), (0.295, 0.885), (0.885, 0.885),
+    # coords = [(0.295, 0.295), (0.885, 0.295), (0.295, 0.885), (0.885, 0.885),
     #     (0.295, 1.475), (0.885, 1.475), (0.295, 2.065), (0.885, 2.065), (0.59, 2.655)]
     for coord in coords:
         navigate_wait(x=coord[0], y=coord[1], z=1, speed=0.5, frame_id='map')
