@@ -20,7 +20,7 @@ DELTA = 150
 rospy.init_node('simple_recognition')
 bridge = CvBridge()
 # Раскоментить для публикации
-image_pub = rospy.Publisher('~debug', Image)
+image_pub = rospy.Publisher('~debug', Image,queue_size=None)
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 land = rospy.ServiceProxy('land', Trigger)
