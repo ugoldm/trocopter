@@ -6,13 +6,13 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
 MIN_AREA = 400
-MAX_AREA = 9000
+MAX_AREA = float("inf")
 
 GREEN_COLOUR = (45, 135, 95)
 YELLOW_COLOUR = (215, 175, 40)
 RED_COLOUR = (255, 75, 75)
 WHITE_COLOUR = (255, 255, 255)
-DELTA = 150
+DELTA = 75
 
 rospy.init_node('simple_recognition')
 bridge = CvBridge()
