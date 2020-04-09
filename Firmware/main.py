@@ -21,7 +21,7 @@ get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 land = rospy.ServiceProxy('land', Trigger)
 bridge = CvBridge()
-image_pub = rospy.Publisher('~debug', Image, queue_size=100)
+image_pub = rospy.Publisher('~debug', Image, queue_size=1)
 
 
 def image_callback(data):
