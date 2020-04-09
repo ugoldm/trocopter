@@ -14,7 +14,7 @@ GREEN_COLOUR = (65, 115, 85)
 YELLOW_COLOUR = (175, 145, 58)
 RED_COLOUR = (165, 70, 75)
 WHITE_COLOUR = (255, 255, 255)
-DELTA = 43
+DELTA = 60
 
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
