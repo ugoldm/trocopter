@@ -15,7 +15,7 @@ GREEN_COLOUR = (65, 115, 85)
 YELLOW_COLOUR = (175, 145, 58)
 RED_COLOUR = (165, 70, 75)
 WHITE_COLOUR = (255, 255, 255)
-DELTA = 43
+DELTA = 60
 PATIENTS = [[0.295, 0.295], [0.295, 0.885], [0.295, 1.475],
             [0.295, 2.065], [0.59, 2.655], [0.885, 2.065],
             [0.885, 1.475], [0.885, 0.885], [0.885, 0.295]]
@@ -101,62 +101,71 @@ rospy.sleep(4)
 navigate(x=0.295, y=0.295, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0.295, y=0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0.295, y=-0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
 print(is_near())
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 PATIENTS = PATIENTS[1:]
 
 navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
 rospy.sleep(4)
-DICT_1[PATIENTS[0]] = most_frequent(arr)
+if len(arr):
+    DICT_1[PATIENTS[0]] = most_frequent(arr)
 arr = []
 print(is_near())
 
