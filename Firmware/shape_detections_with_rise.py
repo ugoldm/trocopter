@@ -66,14 +66,10 @@ def image_callback(data):
     image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 
 
-def main():
-    image_sub=rospy.Subscriber(
+image_sub=rospy.Subscriber(
         'main_camera/image_raw/throttled', Image, image_callback)
-    navigate(x=0, y=0, z=0.7, speed=0.35, frame_id='body', auto_arm=True)
-	rospy.sleep(10)
-	land()
-    rospy.spin()
+navigate(x=0, y=0, z=0.7, speed=0.35, frame_id='body', auto_arm=True)
+rospy.sleep(10)
+land()
+rospy.spin()
 
-
-if __name__ == '__main__':
-    main()
