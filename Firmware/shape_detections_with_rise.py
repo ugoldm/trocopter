@@ -44,6 +44,11 @@ def image_callback(data):
             # y_title = approx.ravel()[1]
 
             cv2.drawContours(img, [approx], 0, (0, 0, 0), 5)
+            x, y, w, h = cv2.boundingRect(contour)
+            cropped_image = np.array(img[y:y + h, x:x + w])
+            main_color = np.average(np.average(
+                cropped_image, axis=0), axis=0)[::-1]
+
 
             min_delta = min(abs(main_color - GREEN_COLOUR).sum(),
                             abs(main_color - YELLOW_COLOUR).sum(),
