@@ -7,14 +7,14 @@ from cv_bridge import CvBridge
 from clever import srv
 from std_srvs.srv import Trigger
 
-MIN_AREA = 400
+MIN_AREA = 0
 MAX_AREA = float("inf")
 
 GREEN_COLOUR = (65, 115, 85)
 YELLOW_COLOUR = (175, 145, 58)
 RED_COLOUR = (165, 70, 75)
 WHITE_COLOUR = (255, 255, 255)
-DELTA = 60
+DELTA = 150
 
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
@@ -39,9 +39,7 @@ def image_callback(data):
         if area > MIN_AREA and area < MAX_AREA:
             approx=cv2.approxPolyDP(
                 contour, 0.01 * cv2.arcLength(contour, True), True)
-            # Если нужна надпись
-            # x_title = approx.ravel()[0]
-            # y_title = approx.ravel()[1]
+
 
             cv2.drawContours(img, [approx], 0, (0, 0, 0), 5)
             x, y, w, h = cv2.boundingRect(contour)
@@ -72,7 +70,7 @@ def image_callback(data):
 
 
 image_sub=rospy.Subscriber(
-        'main_camera/image_raw/throttled', Image, image_callback)
+        'main_camera/image_raw_throttled', Image, image_callback)
 navigate(x=0, y=0, z=0.7, speed=0.35, frame_id='body', auto_arm=True)
 rospy.sleep(10)
 land()
