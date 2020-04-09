@@ -89,62 +89,62 @@ image_sub = rospy.Subscriber(
 navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(15)
 
-navigate(x=0.295, y=0.295, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
 
-navigate(x=0.885, y=0.295, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.295, y=0.885, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.885, y=0.885, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.295, y=1.475, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.885, y=1.475, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.295, y=2.065, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.885, y=2.065, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0.59, y=2.655, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0.59, y=2.655, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = 1
 rospy.sleep(1)
 check = 0
 
-navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 
 land()
