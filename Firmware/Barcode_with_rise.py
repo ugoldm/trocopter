@@ -27,7 +27,7 @@ def image_callback_qr(data):
         xc = x + w/2
         yc = y + h/2
         if b_data in allowable:
-	    cv2.putText(cv_image,b_data, (xc,yc))
+	    #cv2.putText(cv_image,b_data, (xc,yc))
 	    print(b_data)
     image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
