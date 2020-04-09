@@ -4,6 +4,7 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from clever import srv
 from std_srvs.srv import Trigger
+import cv2
 
 bridge = CvBridge()
 rospy.init_node('barcode_test')
