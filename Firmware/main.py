@@ -61,7 +61,7 @@ def image_callback(data):
 
 
 image_sub = rospy.Subscriber(
-    'main_camera/image_raw', Image, image_callback)
+    'main_camera/image_raw/throttled', Image, image_callback)
 
 
 navigate(x=0, y=0, z=1, speed=0.2, frame_id='body', auto_arm=True)

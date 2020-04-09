@@ -31,6 +31,6 @@ def image_callback_qr(data):
     image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback_qr, queue_size=1)
-navigate(x=0, y=0, z=1, speed=0.3, frame_id='body', auto_arm=True)
+navigate(x=0, y=0, z=0.7, speed=0.35, frame_id='body', auto_arm=True)
 rospy.sleep(10)
 land()

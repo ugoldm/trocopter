@@ -76,13 +76,13 @@ def image_callback(data):
 
 
 image_sub = rospy.Subscriber(
-    'main_camera/image_raw', Image, image_callback)
+    'main_camera/image_raw/throttled', Image, image_callback)
 
 map_begin = get_telemetry(frame_id="map")
 print(map_begin.x)
 print(map_begin.y)
 
-navigate(x=0, y=0, z=1, speed=0.2, frame_id='body', auto_arm=True)
+navigate(x=0, y=0, z=0.7, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(4)
 
 navigate(x=0.295, y=0.295, z=0, speed=0.2, frame_id='body')
