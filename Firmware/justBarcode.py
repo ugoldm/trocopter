@@ -6,8 +6,9 @@ from sensor_msgs.msg import Image
 bridge = CvBridge()
 
 rospy.init_node('barcode_test')
+image_pub = rospy.Publisher('~debug', Image, queue_size=1)
+allowable = ("COVID - 19","healthy","Non COVID - 19")
 
-# Image subscriber callback function
 def image_callback_qr(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     barcodes = pyzbar.decode(cv_image)
@@ -17,13 +18,11 @@ def image_callback_qr(data):
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
+        if b_data in allowable:
+	    cv2.putText(cv_image,b_data, (xc,yc))
+	    print(b_data)
+	image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 
-def main():
-	image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback_qr, queue_size=1)
-
-	rospy.spin()
-	
-	if __name__ == '__main__':
-    main()
+image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback_qr, queue_size=1)
+rospy.spin()
