@@ -29,20 +29,11 @@ get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 land = rospy.ServiceProxy('land', Trigger)
 
+allowable = ("COVID - 19","healthy","Non COVID - 19")
 rospy.init_node('detection')
 bridge = CvBridge()
 image_pub = rospy.Publisher('~debug', Image, queue_size=1)
 first_fly = True
-
-
-def is_near():
-    map_now = get_telemetry(frame_id="map")
-    tel_now = [map_now.x - map_begin.x, map_now.y - map_begin.y]
-    if math.sqrt((tel_now[0] - PATIENTS[0][0])**2 + (tel_now[1] - PATIENTS[0][1])**2) < 0.2:
-        return True
-    else:
-        return tel_now
-
 
 def image_callback(data):
 
@@ -121,58 +112,37 @@ image_sub = rospy.Subscriber(
     'main_camera/image_raw_throttled', Image, image_callback)
 
 
-map_begin = get_telemetry(frame_id="map")
-print(map_begin.x)
-print(map_begin.y)
-
-navigate(x=0, y=0, z=0.7, speed=0.2, frame_id='body', auto_arm=True)
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(15)
 
-navigate(x=0.295, y=0.295, z=0, speed=0.2, frame_id='body')
+navigate(x=0.295, y=0.295, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.885, y=0.295, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.295, y=0.885, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.885, y=0.885, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0.295, y=0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.295, y=1.475, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0.295, y=-0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.885, y=1.475, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.295, y=2.065, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.885, y=2.065, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
 
-navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
+navigate(x=0.59, y=2.655, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(6)
-print(is_near())
 
-navigate(x=-0.885, y=-0.295, z=0, speed=0.2, frame_id='body')
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 
 land()
@@ -180,53 +150,3 @@ rospy.sleep(60)
 print("Wait 1 min")
 first_fly = False
 
-navigate(x=0, y=0, z=0.7, speed=0.2, frame_id='body', auto_arm=True)
-rospy.sleep(15)
-
-navigate(x=0.295, y=0.295, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0, y=0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0.295, y=0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0.295, y=-0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-PATIENTS = PATIENTS[1:]
-
-navigate(x=0, y=-0.59, z=0, speed=0.2, frame_id='body')
-rospy.sleep(6)
-print(is_near())
-
-navigate(x=-0.885, y=-0.295, z=0, speed=0.2, frame_id='body')
-rospy.sleep(8)
-land()
