@@ -1,3 +1,4 @@
+#coding: utf8
 import rospy
 from pyzbar import pyzbar
 from cv_bridge import CvBridge

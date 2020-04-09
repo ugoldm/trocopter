@@ -1,3 +1,4 @@
+#coding: utf8
 import rospy
 from clever import srv
 from std_srvs.srv import Trigger
