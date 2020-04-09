@@ -76,7 +76,7 @@ def image_callback(data):
 
 
 image_sub = rospy.Subscriber(
-    'main_camera/image_raw/throttled', Image, image_callback)
+    'main_camera/image_raw_throttled', Image, image_callback)
 
 map_begin = get_telemetry(frame_id="map")
 print(map_begin.x)
