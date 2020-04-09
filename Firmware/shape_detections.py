@@ -14,26 +14,20 @@ RED_COLOUR = (165, 70, 75)
 WHITE_COLOUR = (255, 255, 255)
 DELTA = 43
 
-rospy.init_node('simple_recognition')
+rospy.init_node('detection')
 bridge = CvBridge()
-# Раскоментить для публикации
-image_pub = rospy.Publisher('~debug', Image, queue_size=None)
+image_pub = rospy.Publisher('~debug', Image, queue_size=1)
 
 
 def image_callback(data):
     img = bridge.imgmsg_to_cv2(data, 'bgr8')
-
-    # Много штук для улучшения качества распознавания формы
-    # imgGrey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    #_, thrash = cv2.threshold(imgGrey, 240, 255, cv2.THRESH_BINARY)
-    #_, contours, _ = cv2.findContours(
-    #    thrash, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
     gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred=cv2.GaussianBlur(gray, (5, 5), 0)
     _, thresh=cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)
     _, contours, _=cv2.findContours(thresh, cv2.RETR_EXTERNAL,
     cv2.CHAIN_APPROX_SIMPLE)
+    
     for contour in contours:
         area=cv2.contourArea(contour)
         if area > MIN_AREA and area < MAX_AREA:
@@ -52,12 +46,16 @@ def image_callback(data):
 
             if abs(main_color - GREEN_COLOUR).sum() < DELTA:
                 print("Зелёный")
+                cv2.putText(img, "Зелёный", (x + w, y + h))
+
             elif abs(main_color - YELLOW_COLOUR).sum() < DELTA:
                 print("Желтый")
+                cv2.putText(img, "Желтый", (x + w, y + h))
+
             elif abs(main_color - RED_COLOUR).sum() < DELTA:
                 print("Красный")
-            elif abs(main_color - WHITE_COLOUR).sum() < DELTA:
-                print("Белый")
+                cv2.putText(img, "Красный", (x + w, y + h))
+
     # Раскоментить для публикации
     image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 
