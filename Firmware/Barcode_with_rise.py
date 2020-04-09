@@ -8,6 +8,7 @@ from std_srvs.srv import Trigger
 bridge = CvBridge()
 rospy.init_node('barcode_test')
 allowable = ("COVID - 19","healthy","Non COVID - 19")
+image_pub = rospy.Publisher('~debug', Image, queue_size=1)
 
 #image_pub = rospy.Publisher('~debug', Image)
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
@@ -27,7 +28,7 @@ def image_callback_qr(data):
         if b_data in allowable:
 	    cv2.putText(cv_image,b_data, (xc,yc))
 	    print(b_data)
-	image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
+    image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback_qr, queue_size=1)
 navigate(x=0, y=0, z=1, speed=0.3, frame_id='body', auto_arm=True)
