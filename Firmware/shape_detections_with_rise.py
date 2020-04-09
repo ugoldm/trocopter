@@ -51,15 +51,15 @@ def image_callback(data):
 
             if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
                 print("Зелёный")
-                cv2.putText(img, "Зелёный", (x + w, y + h))
+                #cv2.putText(img, "Зелёный", (x + w, y + h))
 
             elif abs(main_color - YELLOW_COLOUR).sum() < DELTA and abs(main_color - YELLOW_COLOUR).sum() == min_delta:
                 print("Желтый")
-                cv2.putText(img, "Желтый", (x + w, y + h))
+                #cv2.putText(img, "Желтый", (x + w, y + h))
 
             elif abs(main_color - RED_COLOUR).sum() < DELTA and abs(main_color - RED_COLOUR).sum() == min_delta:
                 print("Красный")
-                cv2.putText(img, "Красный", (x + w, y + h))
+                #cv2.putText(img, "Красный", (x + w, y + h))
 
 
     # Раскоментить для публикации
