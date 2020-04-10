@@ -44,3 +44,26 @@ PATIENTS = {'1': [0.295, 0.295], '2': [0.885, 0.295], '3': [0.295, 0.885],
             '7': [0.295, 2.065], '8': [0.885, 2.065], '9': [0.59, 2.655]}
 ```
 Таким образом, когда коптер находится на какой-либо координате, распознавалка начинает работать.
+
+Алгоритм распознавания работает следующим образом:
+Мы берем изображение с камеры, обрезаем его по центру, находим доминантный цвет и сравниваем его с заданными значениями
+```python
+img = bridge.imgmsg_to_cv2(data, 'bgr8')
+        #Обрезаем по центру
+        img_crop = img[150:500, 180:520]
+        #Определяем основной цвет
+        main_color = np.average(np.average(
+            img_crop, axis=0), axis=0)[::-1]
+        #Считаем наименьшее отклонения от констант
+        min_delta = min(abs(main_color - GREEN_COLOUR).sum(),
+                        abs(main_color - YELLOW_COLOUR_1).sum(),
+                        abs(main_color - RED_COLOUR).sum())
+        #Проверяем подходит ли отклонение под DELTA и сравниваем с минимальным
+        if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
+            print(check + ": Зелёный")
+            #Помещаем текст на фото
+            cv2.putText(img, "Зеленый", (x + w, y + h),
+                        cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
+            #Добавляем в массив цвет
+            arr.append("green")
+```
