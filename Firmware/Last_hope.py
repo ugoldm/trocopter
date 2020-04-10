@@ -52,6 +52,11 @@ def most_frequent(List):
 #Основной колл-бек, включающий в себя распознавание цвета и QR кодов.
 def image_callback(data):
     if first_fly and check != '0':
+        global x
+        global y
+        global h
+        global w
+        global arr
         #Получаем изображения с камеры
         img = bridge.imgmsg_to_cv2(data, 'bgr8')
         #Обрезаем по центру
