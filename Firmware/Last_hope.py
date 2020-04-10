@@ -72,7 +72,7 @@ def image_callback(data):
         if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
             #print(check + ": Зелёный")
             #Помещаем текст на фото
-            cv2.putText(img_crop, "Зеленый", (x + w, y + h),
+            cv2.putText(img_crop, "Зеленый", (20,50),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
             #Добавляем в массив цвет
             arr.append("green")
@@ -80,14 +80,14 @@ def image_callback(data):
         elif abs(main_color - YELLOW_COLOUR_1).sum() < DELTA and abs(main_color - YELLOW_COLOUR_1).sum() == min_delta:
             #print(check + ": Желтый")
             #print("Сброшено")
-            cv2.putText(img_crop, "Желтый", (x + w, y + h),
+            cv2.putText(img_crop, "Желтый", (20,50),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 255), 3)
             arr.append("yellow")
 
         elif abs(main_color - RED_COLOUR).sum() < DELTA and abs(main_color - RED_COLOUR).sum() == min_delta:
             #print(check + ": Красный")
             #print("Сброшено")
-            cv2.putText(img_crop, "Красный", (x + w, y + h),
+            cv2.putText(img_crop, "Красный", (20,50),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 3)
             arr.append("red")
 
