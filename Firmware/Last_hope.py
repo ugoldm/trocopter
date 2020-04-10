@@ -12,7 +12,7 @@ from pyzbar import pyzbar
 MIN_AREA = 0
 MAX_AREA = float("inf")
 
-GREEN_COLOUR = (105, 165, 135)
+GREEN_COLOUR = (125, 165, 135)
 YELLOW_COLOUR_1 = (145, 135, 88)
 RED_COLOUR = (165, 100, 105)
 WHITE_COLOUR = (255, 255, 255)
