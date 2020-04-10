@@ -90,37 +90,47 @@ def image_callback(data):
     elif check != '0':
         #Получаем изображения с камеры
         cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
-        #
+        #Получаем все QR коды
         barcodes = pyzbar.decode(cv_image)
         for barcode in barcodes:
+            #расшифровываем QR
             b_data = barcode.data.encode("utf-8")
             b_type = barcode.type
             (x, y, w, h) = barcode.rect
             xc = x + w / 2
             yc = y + h / 2
+            #Если это один из допустимых QR,то добавляем вывод(чтобы не путуть с ArUco)
             if b_data in allowable:
                 cv2.putText(cv_image, b_data, (xc, yc),
                             cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
                 print(check+": "+b_data)
+        #Публикуем изображение
         image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
-
+#Оформляем подписку на топик камеры с колл-беком
 image_sub = rospy.Subscriber(
     'main_camera/image_raw_throttled', Image, image_callback)
 
-
+#Взлет
 navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(15)
 
+#Летим в первую точку
 navigate(x=0.295, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
+#Запускаем распознование
 check = '1'
 rospy.sleep(1)
+#Останавливаем распознование
 check = '0'
+#Если цвет красный или желтый
 if most_frequent(arr) in ("red", "yellow"):
+    #Добавляем в словарь для второго облета
     SUSPECTS["1"] = most_frequent(arr)
+    #Включаем свет ленту
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
+            #Выключаем свет ленту
     set_effect(effect='fill', r=255, g=255, b=255)
 
 arr = []
