@@ -13,10 +13,10 @@ from clever.srv import SetLEDEffect
 MIN_AREA = 0
 MAX_AREA = float("inf")
 
-GREEN_COLOUR = (125, 135, 135)
-YELLOW_COLOUR_1 = (145, 125, 97)
-
+GREEN_COLOUR = (125, 165, 135)
+YELLOW_COLOUR_1 = (131, 135, 97)
 RED_COLOUR = (155, 117, 125)
+WHITE_COLOUR = (255, 255, 255)
 
 DELTA = 75
 
@@ -72,7 +72,7 @@ def image_callback(data):
         if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
             #print(check + ": Зелёный")
             #Помещаем текст на фото
-            cv2.putText(img_crop, "Зеленый", (20,50),
+            cv2.putText(img_crop, "Зеленый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
             #Добавляем в массив цвет
             arr.append("green")
@@ -80,18 +80,18 @@ def image_callback(data):
         elif abs(main_color - YELLOW_COLOUR_1).sum() < DELTA and abs(main_color - YELLOW_COLOUR_1).sum() == min_delta:
             #print(check + ": Желтый")
             #print("Сброшено")
-            cv2.putText(img_crop, "Желтый", (20,50),
+            cv2.putText(img_crop, "Желтый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 255), 3)
             arr.append("yellow")
 
         elif abs(main_color - RED_COLOUR).sum() < DELTA and abs(main_color - RED_COLOUR).sum() == min_delta:
             #print(check + ": Красный")
             #print("Сброшено")
-            cv2.putText(img_crop, "Красный", (20,50),
+            cv2.putText(img_crop, "Красный", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 3)
             arr.append("red")
 
-        image_pub.publish(bridge.cv2_to_imgmsg(img_crop, 'bgr8'))
+        image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
     elif check != '0':
         #Получаем изображения с камеры
         cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
@@ -118,15 +118,15 @@ image_sub = rospy.Subscriber(
     'main_camera/image_raw_throttled', Image, image_callback)
 
 #Взлет
-navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='body', auto_arm=True)
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(15)
 
 #Летим в первую точку
-navigate(x=0.295, y=0.295, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.295, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 #Запускаем распознование
 check = '1'
-rospy.sleep(2)
+rospy.sleep(1)
 #Останавливаем распознование
 check = '0'
 #Если цвет красный или желтый, добавляем эту точку в словарь для второго облета
@@ -142,10 +142,10 @@ if most_frequent(arr) in ("red", "yellow"):
 #Очищаем массив
 arr = []
 
-navigate(x=0.885, y=0.295, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.885, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '2'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -157,10 +157,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.295, y=0.885, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.295, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '3'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -172,10 +172,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.885, y=0.885, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.885, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '4'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -187,10 +187,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.295, y=1.475, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.295, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '5'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -202,10 +202,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.885, y=1.475, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.885, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '6'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -217,10 +217,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.295, y=2.065, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.295, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '7'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -232,10 +232,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.885, y=2.065, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.885, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '8'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -247,10 +247,10 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.59, y=2.655, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(10)
+navigate(x=0.59, y=2.655, z=0.5, speed=0.2, frame_id='aruco_map')
+rospy.sleep(8)
 check = '9'
-rospy.sleep(2)
+rospy.sleep(1)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -261,21 +261,21 @@ if most_frequent(arr) in ("red", "yellow"):
     print("Сброшено")
 arr = []
 
-navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='aruco_map')
+navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(18)
 
 land()
 print("Wait 1 min")
-rospy.sleep(60)
+rospy.sleep(120)
 first_fly = False
 
-navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='body', auto_arm=True)
-rospy.sleep(10)
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
+rospy.sleep(8)
 
 for i in list(SUSPECTS.keys()):
     coord = PATIENTS[i]
-    navigate(x=coord[0], y=coord[1], z=0.65, speed=0.2, frame_id='aruco_map')
-    rospy.sleep(10)
+    navigate(x=coord[0], y=coord[1], z=0.6, speed=0.2, frame_id='aruco_map')
+    rospy.sleep(8)
     check = i
     rospy.sleep(1)
     check = "0"
@@ -286,7 +286,7 @@ for i in list(SUSPECTS.keys()):
     arr = []
 
 
-navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='aruco_map')
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='aruco_map')
 rospy.sleep(10)
 land()
 print("Yeah!")
