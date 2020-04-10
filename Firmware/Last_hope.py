@@ -118,11 +118,11 @@ image_sub = rospy.Subscriber(
     'main_camera/image_raw_throttled', Image, image_callback)
 
 #Взлет
-navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
+navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(15)
 
 #Летим в первую точку
-navigate(x=0.295, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=0.295, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 #Запускаем распознование
 check = '1'
@@ -142,7 +142,7 @@ if most_frequent(arr) in ("red", "yellow"):
 #Очищаем массив
 arr = []
 
-navigate(x=0.885, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=0.295, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '2'
 rospy.sleep(1)
@@ -157,7 +157,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.295, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=0.885, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '3'
 rospy.sleep(1)
@@ -172,7 +172,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.885, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=0.885, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '4'
 rospy.sleep(1)
@@ -187,7 +187,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.295, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=1.475, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '5'
 rospy.sleep(1)
@@ -202,7 +202,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.885, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=1.475, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '6'
 rospy.sleep(1)
@@ -217,7 +217,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.295, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.295, y=2.065, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '7'
 rospy.sleep(1)
@@ -232,7 +232,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.885, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.885, y=2.065, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '8'
 rospy.sleep(1)
@@ -247,7 +247,7 @@ if most_frequent(arr) in ("red", "yellow"):
 
 arr = []
 
-navigate(x=0.59, y=2.655, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0.59, y=2.655, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '9'
 rospy.sleep(1)
@@ -261,7 +261,7 @@ if most_frequent(arr) in ("red", "yellow"):
     print("Сброшено")
 arr = []
 
-navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
+navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(18)
 
 land()
@@ -269,12 +269,12 @@ print("Wait 1 min")
 rospy.sleep(60)
 first_fly = False
 
-navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
+navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(8)
 
 for i in list(SUSPECTS.keys()):
     coord = PATIENTS[i]
-    navigate(x=coord[0], y=coord[1], z=0.6, speed=0.2, frame_id='aruco_map')
+    navigate(x=coord[0], y=coord[1], z=0.65, speed=0.2, frame_id='aruco_map')
     rospy.sleep(8)
     check = i
     rospy.sleep(1)
@@ -286,7 +286,7 @@ for i in list(SUSPECTS.keys()):
     arr = []
 
 
-navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='aruco_map')
+navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='aruco_map')
 rospy.sleep(10)
 land()
 print("Yeah!")
