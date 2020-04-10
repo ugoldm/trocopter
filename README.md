@@ -71,11 +71,24 @@ img = bridge.imgmsg_to_cv2(data, 'bgr8')
 ```python
 arr.append("green")
 ```
-Затем мы определяем, какое из значений встречается чаще всего
+Затем мы определяем, какое из значений встречается чаще всего и оставляем только его.
 ```python
 def most_frequent(List):
     try:
         return max(set(List), key=List.count)
     except:
         return " none"
+```
+3)
+Затем проверяем, если цвет красный или желтый, и тогда записываем его в словарь для второго облета. В этом случае также включаем светодиодную индикацию.
+```python
+#Если цвет красный или желтый, добавляем эту точку в словарь для второго облета
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["1"] = most_frequent(arr)
+    #Делаем сигнал светодиодной лентой
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+#Очищаем массив
+arr = []
 ```
