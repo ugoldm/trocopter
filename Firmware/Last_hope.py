@@ -107,7 +107,12 @@ rospy.sleep(8)
 check = '1'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["1"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["1"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.885, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -115,7 +120,12 @@ rospy.sleep(8)
 check = '2'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["2"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["2"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.295, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -123,7 +133,12 @@ rospy.sleep(8)
 check = '3'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["3"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["3"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.885, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -131,7 +146,12 @@ rospy.sleep(8)
 check = '4'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["4"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["4"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.295, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -139,7 +159,12 @@ rospy.sleep(8)
 check = '5'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["5"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["5"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.885, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -147,7 +172,12 @@ rospy.sleep(8)
 check = '6'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["6"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["6"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.295, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -155,7 +185,12 @@ rospy.sleep(8)
 check = '7'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["7"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["7"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.885, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -163,7 +198,12 @@ rospy.sleep(8)
 check = '8'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["8"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["8"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0.59, y=2.655, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -171,7 +211,12 @@ rospy.sleep(8)
 check = '9'
 rospy.sleep(1)
 check = '0'
-SUSPECTS["9"] = most_frequent(arr)
+if most_frequent(arr) in ("red", "yellow"):
+    SUSPECTS["9"] = most_frequent(arr)
+    set_effect(effect='blink', r=148, g=0, b=211)
+    rospy.sleep(5)
+    set_effect(effect='fill', r=255, g=255, b=255)
+
 arr = []
 
 navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
