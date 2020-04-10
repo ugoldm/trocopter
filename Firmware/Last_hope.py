@@ -91,7 +91,7 @@ def image_callback(data):
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 3)
             arr.append("red")
 
-        image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
+        image_pub.publish(bridge.cv2_to_imgmsg(img_crop, 'bgr8'))
     elif check != '0':
         #Получаем изображения с камеры
         cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
