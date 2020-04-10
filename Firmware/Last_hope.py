@@ -91,8 +91,7 @@ def image_callback(data):
             if b_data in allowable:
                 cv2.putText(cv_image, b_data, (xc, yc),
                             cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
-                print(check,end=":")
-                print(b_data)
+                print(check+": "+b_data)
         image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 
