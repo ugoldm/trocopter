@@ -14,8 +14,8 @@ MIN_AREA = 0
 MAX_AREA = float("inf")
 
 GREEN_COLOUR = (125, 165, 135)
-YELLOW_COLOUR_1 = (145, 135, 88)
-RED_COLOUR = (155, 110, 125)
+YELLOW_COLOUR_1 = (131, 135, 97)
+RED_COLOUR = (155, 117, 125)
 WHITE_COLOUR = (255, 255, 255)
 
 DELTA = 75
@@ -72,7 +72,7 @@ def image_callback(data):
         if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
             print(check + ": Зелёный")
             #Помещаем текст на фото
-            cv2.putText(img, "Зеленый", (x + w, y + h),
+            cv2.putText(img_crop, "Зеленый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
             #Добавляем в массив цвет
             arr.append("green")
@@ -80,14 +80,14 @@ def image_callback(data):
         elif abs(main_color - YELLOW_COLOUR_1).sum() < DELTA and abs(main_color - YELLOW_COLOUR_1).sum() == min_delta:
             print(check + ": Желтый")
             print("Сброшено")
-            cv2.putText(img, "Желтый", (x + w, y + h),
+            cv2.putText(img_crop, "Желтый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 255), 3)
             arr.append("yellow")
 
         elif abs(main_color - RED_COLOUR).sum() < DELTA and abs(main_color - RED_COLOUR).sum() == min_delta:
             print(check + ": Красный")
             print("Сброшено")
-            cv2.putText(img, "Красный", (x + w, y + h),
+            cv2.putText(img_crop, "Красный", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 3)
             arr.append("red")
 
@@ -243,11 +243,11 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(18)
 
 land()
-rospy.sleep(60)
 print("Wait 1 min")
+rospy.sleep(60)
 first_fly = False
 
 navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
