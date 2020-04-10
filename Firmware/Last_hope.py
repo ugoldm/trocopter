@@ -19,9 +19,9 @@ WHITE_COLOUR = (255, 255, 255)
 
 DELTA = 75
 
-PATIENTS = {'1': [0.295, 0.295],'2':[0.885, 0.295],'3': [0.295, 0.885],
-            '4':[0.885, 0.885],'5':[0.295, 1.475] ,'6':[0.885, 1.475],
-            '7':[0.295, 2.065],'8':[0.885, 2.065] ,'9':[0.59, 2.655]}
+PATIENTS = {'1': [0.295, 0.295], '2': [0.885, 0.295], '3': [0.295, 0.885],
+            '4': [0.885, 0.885], '5': [0.295, 1.475], '6': [0.885, 1.475],
+            '7': [0.295, 2.065], '8': [0.885, 2.065], '9': [0.59, 2.655]}
 SUSPECTS = {}
 
 set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)
@@ -39,6 +39,14 @@ x = 180
 y = 150
 h = 100
 w = 100
+arr = []
+
+
+def most_frequent(List):
+    try:
+        return max(set(List), key=List.count)
+    except:
+        return "green_"
 
 
 def image_callback(data):
@@ -54,18 +62,21 @@ def image_callback(data):
             print(check + ": Зелёный")
             cv2.putText(img, "Зеленый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
+            arr.append("green")
 
         elif abs(main_color - YELLOW_COLOUR_1).sum() < DELTA and abs(main_color - YELLOW_COLOUR_1).sum() == min_delta:
             print(check + ": Желтый")
             print("Сброшено")
             cv2.putText(img, "Желтый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 255), 3)
+            arr.append("yellow")
 
         elif abs(main_color - RED_COLOUR).sum() < DELTA and abs(main_color - RED_COLOUR).sum() == min_delta:
             print(check + ": Красный")
             print("Сброшено")
             cv2.putText(img, "Красный", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 3)
+            arr.append("red")
 
         image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
     elif check != '0':
@@ -96,54 +107,72 @@ rospy.sleep(8)
 check = '1'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["1"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.885, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '2'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["2"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.295, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '3'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["3"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.885, y=0.885, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '4'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["4"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.295, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '5'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["5"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.885, y=1.475, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '6'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["6"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.295, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '7'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["7"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.885, y=2.065, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '8'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["8"] = most_frequent(arr)
+arr = []
 
 navigate(x=0.59, y=2.655, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
 check = '9'
 rospy.sleep(1)
 check = '0'
+SUSPECTS["9"] = most_frequent(arr)
+arr = []
 
 navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
