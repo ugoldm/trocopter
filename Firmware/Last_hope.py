@@ -70,7 +70,7 @@ def image_callback(data):
                         abs(main_color - RED_COLOUR).sum())
         #Проверяем подходит ли отклонение под DELTA и сравниваем с минимальным
         if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
-            print(check + ": Зелёный")
+            #print(check + ": Зелёный")
             #Помещаем текст на фото
             cv2.putText(img_crop, "Зеленый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
@@ -78,15 +78,15 @@ def image_callback(data):
             arr.append("green")
 
         elif abs(main_color - YELLOW_COLOUR_1).sum() < DELTA and abs(main_color - YELLOW_COLOUR_1).sum() == min_delta:
-            print(check + ": Желтый")
-            print("Сброшено")
+            #print(check + ": Желтый")
+            #print("Сброшено")
             cv2.putText(img_crop, "Желтый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 255), 3)
             arr.append("yellow")
 
         elif abs(main_color - RED_COLOUR).sum() < DELTA and abs(main_color - RED_COLOUR).sum() == min_delta:
-            print(check + ": Красный")
-            print("Сброшено")
+            #print(check + ": Красный")
+            #print("Сброшено")
             cv2.putText(img_crop, "Красный", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 3)
             arr.append("red")
@@ -109,6 +109,7 @@ def image_callback(data):
                 cv2.putText(cv_image, b_data, (xc, yc),
                             cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
                 print(check+": "+b_data)
+                arr.append(b_data)
         #Публикуем изображение в топик
         image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
@@ -129,12 +130,15 @@ rospy.sleep(1)
 #Останавливаем распознование
 check = '0'
 #Если цвет красный или желтый, добавляем эту точку в словарь для второго облета
+
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["1"] = most_frequent(arr)
     #Делаем сигнал светодиодной лентой
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 #Очищаем массив
 arr = []
 
@@ -143,11 +147,13 @@ rospy.sleep(8)
 check = '2'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["2"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -156,11 +162,13 @@ rospy.sleep(8)
 check = '3'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["3"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -169,11 +177,13 @@ rospy.sleep(8)
 check = '4'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["4"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -182,11 +192,13 @@ rospy.sleep(8)
 check = '5'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["5"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -195,11 +207,13 @@ rospy.sleep(8)
 check = '6'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["6"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -208,11 +222,13 @@ rospy.sleep(8)
 check = '7'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["7"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -221,11 +237,13 @@ rospy.sleep(8)
 check = '8'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["8"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
+    print("Сброшено")
 
 arr = []
 
@@ -234,12 +252,13 @@ rospy.sleep(8)
 check = '9'
 rospy.sleep(1)
 check = '0'
+print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
     SUSPECTS["9"] = most_frequent(arr)
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
     set_effect(effect='fill', r=255, g=255, b=255)
-
+    print("Сброшено")
 arr = []
 
 navigate(x=0, y=0, z=0.5, speed=0.2, frame_id='aruco_map')
@@ -260,6 +279,11 @@ for i in list(SUSPECTS.keys()):
     check = i
     rospy.sleep(1)
     check = "0"
+    if most_frequent(arr) == "COVID - 19":
+        set_effect(effect='blink', r=255, g=0, b=0)
+        rospy.sleep(5)
+        set_effect(effect='fill', r=255, g=255, b=255)       
+    arr = []
 
 
 navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='aruco_map')
