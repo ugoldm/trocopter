@@ -236,7 +236,7 @@ for i in list(SUSPECTS.keys()):
     navigate(x=coord[0], y=coord[1], z=0.6, speed=0.2, frame_id='aruco_map')
     rospy.sleep(8)
     check = i
-    rospy.sleep()
+    rospy.sleep(1)
     check = "0"
 
 
