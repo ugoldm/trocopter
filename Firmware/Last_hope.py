@@ -8,6 +8,7 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import math
 from pyzbar import pyzbar
+from clever.srv import SetLEDEffect
 
 MIN_AREA = 0
 MAX_AREA = float("inf")
@@ -41,27 +42,34 @@ h = 100
 w = 100
 arr = []
 
-
+#Функция для определения самого частого элемента в массиве
 def most_frequent(List):
     try:
         return max(set(List), key=List.count)
     except:
         return "green_"
 
-
+#Основной колл-бек
 def image_callback(data):
     if first_fly and check != '0':
+        #Получаем изображения с камеры
         img = bridge.imgmsg_to_cv2(data, 'bgr8')
+        #Обрезаем по центру
         img_crop = img[150:500, 180:520]
+        #Определяем основной цвет
         main_color = np.average(np.average(
             img_crop, axis=0), axis=0)[::-1]
+        #Считаем наименьшее отклонения от констант
         min_delta = min(abs(main_color - GREEN_COLOUR).sum(),
                         abs(main_color - YELLOW_COLOUR_1).sum(),
                         abs(main_color - RED_COLOUR).sum())
+        #Проверяем подходит ли отклонение под DELTA и сравниваем с минимальным
         if abs(main_color - GREEN_COLOUR).sum() < DELTA and abs(main_color - GREEN_COLOUR).sum() == min_delta:
             print(check + ": Зелёный")
+            #Помещаем текст на фото
             cv2.putText(img, "Зеленый", (x + w, y + h),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
+            #Добавляем в массив цвет
             arr.append("green")
 
         elif abs(main_color - YELLOW_COLOUR_1).sum() < DELTA and abs(main_color - YELLOW_COLOUR_1).sum() == min_delta:
@@ -80,7 +88,9 @@ def image_callback(data):
 
         image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
     elif check != '0':
+        #Получаем изображения с камеры
         cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
+        #
         barcodes = pyzbar.decode(cv_image)
         for barcode in barcodes:
             b_data = barcode.data.encode("utf-8")
