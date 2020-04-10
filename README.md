@@ -67,3 +67,15 @@ img = bridge.imgmsg_to_cv2(data, 'bgr8')
             #Добавляем в массив цвет
             arr.append("green")
 ```
+Поскольку распознавалка успевает сработать несколько раз, у нее образуется несколько выводов. Все выводы записываются в один массив
+```python
+arr.append("green")
+```
+Затем мы определяем, какое из значений встречается чаще всего
+```python
+def most_frequent(List):
+    try:
+        return max(set(List), key=List.count)
+    except:
+        return " none"
+```
