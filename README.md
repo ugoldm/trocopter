@@ -90,3 +90,43 @@ if most_frequent(arr) in ("red", "yellow"):
 #Очищаем массив
 arr = []
 ```
+Второй облет
+1) Для облета по координатам мы используем словарь, в котором сохранены координаты точек с красным или желтым цветом.
+```python
+for i in list(SUSPECTS.keys()):
+    coord = PATIENTS[i]
+    navigate(x=coord[0], y=coord[1], z=0.6, speed=0.2, frame_id='aruco_map')
+    rospy.sleep(8)
+    check = i
+    rospy.sleep(1)
+    check = "0"
+```
+2) Далее распознаем QR метки. Опять пользуемся переменной check и firts_fly.
+```python
+elif check != '0':
+        #Получаем изображения с камеры
+        cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
+        #Получаем все QR коды
+        barcodes = pyzbar.decode(cv_image)
+        for barcode in barcodes:
+            #расшифровываем QR
+            b_data = barcode.data.encode("utf-8")
+            b_type = barcode.type
+            (x, y, w, h) = barcode.rect
+            xc = x + w / 2
+            yc = y + h / 2
+            #Если это один из допустимых QR,то добавляем вывод(чтобы не путуть с ArUco)
+            if b_data in allowable:
+                cv2.putText(cv_image, b_data, (xc, yc),
+                            cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+                print(check+": "+b_data)
+                arr.append(b_data)
+  ```
+  3) Ну и, наконец, сигнализируем лентой, если заболевание подтвердилось
+  ```python
+  if most_frequent(arr) == "COVID - 19":
+        set_effect(effect='blink', r=255, g=0, b=0)
+        rospy.sleep(5)
+        set_effect(effect='fill', r=255, g=255, b=255)       
+    arr = []
+  ```
