@@ -123,10 +123,10 @@ rospy.sleep(15)
 
 #Летим в первую точку
 navigate(x=0.295, y=0.295, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 #Запускаем распознование
 check = '1'
-rospy.sleep(1)
+rospy.sleep(2)
 #Останавливаем распознование
 check = '0'
 #Если цвет красный или желтый, добавляем эту точку в словарь для второго облета
@@ -143,9 +143,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.885, y=0.295, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '2'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -158,9 +158,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.295, y=0.885, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '3'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -173,9 +173,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.885, y=0.885, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '4'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -188,9 +188,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.295, y=1.475, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '5'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -203,9 +203,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.885, y=1.475, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '6'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -218,9 +218,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.295, y=2.065, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '7'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -233,9 +233,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.885, y=2.065, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '8'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -248,9 +248,9 @@ if most_frequent(arr) in ("red", "yellow"):
 arr = []
 
 navigate(x=0.59, y=2.655, z=0.65, speed=0.2, frame_id='aruco_map')
-rospy.sleep(8)
+rospy.sleep(10)
 check = '9'
-rospy.sleep(1)
+rospy.sleep(2)
 check = '0'
 print(most_frequent(arr))
 if most_frequent(arr) in ("red", "yellow"):
@@ -270,12 +270,12 @@ rospy.sleep(60)
 first_fly = False
 
 navigate(x=0, y=0, z=0.65, speed=0.2, frame_id='body', auto_arm=True)
-rospy.sleep(8)
+rospy.sleep(10)
 
 for i in list(SUSPECTS.keys()):
     coord = PATIENTS[i]
     navigate(x=coord[0], y=coord[1], z=0.65, speed=0.2, frame_id='aruco_map')
-    rospy.sleep(8)
+    rospy.sleep(10)
     check = i
     rospy.sleep(1)
     check = "0"
