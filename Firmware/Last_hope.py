@@ -90,7 +90,8 @@ def image_callback(data):
             yc = y + h / 2
             if b_data in allowable:
                 cv2.putText(cv_image, b_data, (xc, yc),
-                            cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0), 1)
+                            cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+                print(check,end=":")
                 print(b_data)
         image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
@@ -226,3 +227,20 @@ land()
 rospy.sleep(60)
 print("Wait 1 min")
 first_fly = False
+
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
+rospy.sleep(8)
+
+for i in list(SUSPECTS.keys()):
+    coord = PATIENTS[i]
+    navigate(x=coord[0], y=coord[1], z=0.6, speed=0.2, frame_id='aruco_map')
+    rospy.sleep(8)
+    check = i
+    rospy.sleep()
+    check = "0"
+
+
+navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='aruco_map')
+rospy.sleep(10)
+land()
+print("Yeah!")
