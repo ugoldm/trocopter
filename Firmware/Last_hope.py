@@ -49,7 +49,7 @@ def most_frequent(List):
     except:
         return "green_"
 
-#Основной колл-бек
+#Основной колл-бек, включающий в себя распознавание цвета и QR кодов.
 def image_callback(data):
     if first_fly and check != '0':
         #Получаем изображения с камеры
@@ -104,7 +104,7 @@ def image_callback(data):
                 cv2.putText(cv_image, b_data, (xc, yc),
                             cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
                 print(check+": "+b_data)
-        #Публикуем изображение
+        #Публикуем изображение в топик
         image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 #Оформляем подписку на топик камеры с колл-беком
@@ -123,16 +123,14 @@ check = '1'
 rospy.sleep(1)
 #Останавливаем распознование
 check = '0'
-#Если цвет красный или желтый
+#Если цвет красный или желтый, добавляем эту точку в словарь для второго облета
 if most_frequent(arr) in ("red", "yellow"):
-    #Добавляем в словарь для второго облета
     SUSPECTS["1"] = most_frequent(arr)
-    #Включаем свет ленту
+    #Делаем сигнал светодиодной лентой
     set_effect(effect='blink', r=148, g=0, b=211)
     rospy.sleep(5)
-            #Выключаем свет ленту
     set_effect(effect='fill', r=255, g=255, b=255)
-
+#Очищаем массив
 arr = []
 
 navigate(x=0.885, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
