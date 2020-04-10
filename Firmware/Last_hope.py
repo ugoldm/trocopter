@@ -118,10 +118,10 @@ rospy.sleep(15)
 #Летим в первую точку
 navigate(x=0.295, y=0.295, z=0.5, speed=0.2, frame_id='aruco_map')
 rospy.sleep(8)
-#Запускаем распознование
+#Запускаем распознавание
 check = '1'
 rospy.sleep(1)
-#Останавливаем распознование
+#Останавливаем распознавание
 check = '0'
 #Если цвет красный или желтый, добавляем эту точку в словарь для второго облета
 if most_frequent(arr) in ("red", "yellow"):
@@ -247,13 +247,17 @@ first_fly = False
 
 navigate(x=0, y=0, z=0.6, speed=0.2, frame_id='body', auto_arm=True)
 rospy.sleep(8)
-
+#Получаем список пациентов с повышенной температурой
 for i in list(SUSPECTS.keys()):
+    #Получаем координаты пациентов
     coord = PATIENTS[i]
+    #Летим туда
     navigate(x=coord[0], y=coord[1], z=0.6, speed=0.2, frame_id='aruco_map')
     rospy.sleep(8)
+    #Включаем распознавание
     check = i
     rospy.sleep(1)
+    #Включаем распознавание
     check = "0"
 
 
